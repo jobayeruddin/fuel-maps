@@ -4,16 +4,22 @@
 	"type": "module",
 	"private": true,
 	"scripts": {
-		"dev": "next dev",
+		"dev": "next dev -p 3002",
 		"build": "next build",
 		"start": "next start",
 		"lint": "eslint --fix"
 	},
 	"dependencies": {
+		"@better-auth/prisma-adapter": "^1.7.13",
 		"@heroui/react": "3.2.6",
 		"@heroui/styles": "3.2.6",
+		"@prisma/adapter-mariadb": "^7.10.1",
+		"@prisma/client": "^7.10.1",
+		"better-auth": "^1.7.13",
 		"clsx": "2.1.1",
+		"dotenv": "^18.0.9",
 		"intl-messageformat": "10.7.18",
+		"mariadb": "^3.5.4",
 		"next": "16.3.6",
 		"next-themes": "0.4.6",
 		"react": "19.3.0",
@@ -43,6 +49,7 @@
 		"globals": "16.5.0",
 		"postcss": "8.5.28",
 		"prettier": "3.9.9",
+		"prisma": "^7.10.1",
 		"tailwind-variants": "3.3.1",
 		"tailwindcss": "4.3.3",
 		"typescript": "5.9.3"

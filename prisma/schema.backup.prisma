@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model fuel_inventory {
+  inventory_id Int        @id @default(autoincrement())
+  pump_id      Int
+  fuel_type_id Int
+  quantity     Decimal    @default(0.00) @db.Decimal(12, 2)
+  last_updated DateTime   @default(now()) @db.DateTime(0)
+  oil_pumps    oil_pumps  @relation(fields: [pump_id], references: [pump_id], map: "fuel_inventory_ibfk_1")
+  fuel_types   fuel_types @relation(fields: [fuel_type_id], references: [fuel_type_id], map: "fuel_inventory_ibfk_2")
+
+  @@unique([pump_id, fuel_type_id], map: "pump_id")
+  @@index([fuel_type_id], map: "fuel_type_id")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model fuel_types {
+  fuel_type_id    Int               @id @default(autoincrement())
+  fuel_name       String            @unique(map: "fuel_name") @db.VarChar(60)
+  description     String?           @db.VarChar(255)
+  price_per_liter Decimal           @db.Decimal(10, 2)
+  status          fuel_types_status @default(ACTIVE)
+  fuel_inventory  fuel_inventory[]
+}
+
+model oil_pumps {
+  pump_id        Int              @id @default(autoincrement())
+  name           String           @db.VarChar(120)
+  address        String           @db.VarChar(255)
+  latitude       Decimal?         @db.Decimal(10, 7)
+  longitude      Decimal?         @db.Decimal(10, 7)
+  status         oil_pumps_status @default(ACTIVE)
+  created_at     DateTime         @default(now()) @db.DateTime(0)
+  fuel_inventory fuel_inventory[]
+}
+
+enum fuel_types_status {
+  ACTIVE
+  INACTIVE
+}
+
+enum oil_pumps_status {
+  ACTIVE
+  INACTIVE
+}
