@@ -1,9 +1,31 @@
 @import "tailwindcss";
 @import "@heroui/styles";
 
-@custom-variant dark (&:is(.dark *));
-
 @theme {
 	--font-sans: "font", sans-serif;
 	--font-mono: "monospace", monospace;
+
+	/* Radius tokens */
+	--radius-card: 40px;
+	--radius-control: 40px;
+	--radius-pill: 9999px;
+
+	/* Spacing tokens */
+	--spacing-card-pad: 24px;
+	--spacing-section-pad: 80px;
+
+	/* Aura palette — light/dark via Tailwind v4 light()/dark() */
+	--color-background: light(240 6% 96%) dark(240 4% 7%);
+	--color-surface: light(0 0% 100%) dark(240 3.9% 11%);
+	--color-text-primary: light(240 5.9% 3.9%) dark(0 0% 100%);
+	--color-text-secondary: light(240 5% 33%) dark(240 5% 63%);
+	--color-border: light(240 5.8% 84%) dark(240 3.7% 15.9%);
+	--color-primary: #a3e635;
+	--color-accent: #a3e635;
+}
+
+@layer base {
+	body {
+		@apply bg-background text-text-primary;
+	}
 }
