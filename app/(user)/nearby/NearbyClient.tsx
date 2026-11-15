@@ -101,7 +101,7 @@ export default function NearbyClient() {
             <h2 className="text-lg font-medium mb-4">Your Location</h2>
             <div className="space-y-3">
               <button
-                className="w-full rounded-pill bg-primary px-4 py-3 text-sm font-medium text-black hover:opacity-90 transition-opacity"
+                className="w-full rounded-pill bg-primary px-4 py-3 text-sm font-medium text-white hover:opacity-90 transition-opacity"
                 disabled={loading}
                 onClick={handleGeoLocate}
               >
@@ -152,7 +152,7 @@ export default function NearbyClient() {
             <div className="space-y-3">
               <label className="flex items-center gap-3">
                 <input
-                  className="flex-1 h-2 bg-background rounded-lg appearance-none accent-primary"
+                  className="flex-1 h-2 bg-gray-200 rounded-lg appearance-none accent-primary"
                   max="50"
                   min="1"
                   type="range"

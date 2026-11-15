@@ -63,7 +63,7 @@ export default function Home() {
       </div>
 
       <a
-        className="inline-flex items-center rounded-pill bg-primary px-8 py-3 text-sm font-medium text-black hover:opacity-90 transition-opacity"
+        className="inline-flex items-center rounded-pill bg-primary px-8 py-3 text-sm font-medium text-white hover:opacity-90 transition-opacity"
         href="/login"
       >
         Sign in

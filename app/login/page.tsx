@@ -112,7 +112,7 @@ export default function LoginPage() {
             {error && <p className="text-sm text-red-400 font-mono">{error}</p>}
 
             <button
-              className="w-full rounded-pill bg-primary text-black text-sm font-medium py-3.5 hover:opacity-90 transition-opacity disabled:opacity-50"
+              className="w-full rounded-pill bg-primary text-white text-sm font-medium py-3.5 hover:opacity-90 transition-opacity disabled:opacity-50"
               disabled={pending}
               type="submit"
             >

@@ -145,7 +145,7 @@ export default async function OperatorDashboardPage() {
                   {dashboardData.approvedRequests.map((r: any) => (
                     <div
                       key={r.request_id}
-                      className="p-3 rounded-control bg-background border border-border"
+                      className="p-3 rounded-3xl bg-background border border-border"
                     >
                       <p className="font-medium">
                         {r.fuel_type.fuel_name} - {Number(r.quantity)}L
@@ -155,7 +155,7 @@ export default async function OperatorDashboardPage() {
                       </p>
                       <div className="mt-2 flex gap-2">
                         <a
-                          className="px-3 py-1 text-xs text-primary hover:underline"
+                          className="px-3 py-1 text-xs text-primary hover:underline border border-border rounded-pill"
                           href={`/operator/requests/${r.request_id}`}
                         >
                           Dispense
@@ -177,7 +177,7 @@ export default async function OperatorDashboardPage() {
                 {dashboardData.inventory.map((inv: any) => (
                   <div
                     key={inv.inventory_id}
-                    className="flex items-center justify-between p-3 rounded-control bg-background border border-border"
+                    className="flex items-center justify-between p-3 rounded-3xl bg-background border border-border"
                   >
                     <div>
                       <p className="font-medium">{inv.fuel_types.fuel_name}</p>
@@ -213,7 +213,7 @@ export default async function OperatorDashboardPage() {
               {dashboardData.recentDispensing.map((t: any) => (
                 <div
                   key={t.transaction_id}
-                  className="flex items-center justify-between p-3 rounded-control bg-background border border-border"
+                  className="flex items-center justify-between p-3 rounded-3xl bg-background border border-border"
                 >
                   <div>
                     <p className="font-medium">

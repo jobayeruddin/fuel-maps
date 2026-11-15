@@ -41,7 +41,7 @@ export default async function AdminOperatorsPage() {
           </h1>
         </div>
         <a
-          className="inline-flex items-center rounded-pill bg-primary px-6 py-2 text-sm font-medium text-black hover:opacity-90 transition-opacity"
+          className="inline-flex items-center rounded-pill bg-primary px-6 py-2 text-sm font-medium text-white hover:opacity-90 transition-opacity"
           href="/operators/new"
         >
           Assign Operator
@@ -52,7 +52,7 @@ export default async function AdminOperatorsPage() {
         <div className="rounded-card bg-surface border border-border p-12 text-center">
           <p className="text-text-secondary mb-4">No operators assigned yet.</p>
           <a
-            className="inline-flex items-center rounded-pill bg-primary px-6 py-2 text-sm font-medium text-black hover:opacity-90 transition-opacity"
+            className="inline-flex items-center rounded-pill bg-primary px-6 py-2 text-sm font-medium text-white hover:opacity-90 transition-opacity"
             href="/operators/new"
           >
             Assign First Operator

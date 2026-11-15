@@ -34,7 +34,7 @@ export default async function UserRequestsPage() {
           </h1>
         </div>
         <Link
-          className="inline-flex items-center rounded-pill bg-primary px-6 py-2 text-sm font-medium text-black hover:opacity-90 transition-opacity"
+          className="inline-flex items-center rounded-pill bg-primary px-6 py-2 text-sm font-medium text-white hover:opacity-90 transition-opacity"
           href="/requests/new"
         >
           New Request
@@ -45,7 +45,7 @@ export default async function UserRequestsPage() {
         <div className="rounded-card bg-surface border border-border p-12 text-center">
           <p className="text-text-secondary mb-4">No fuel requests yet.</p>
           <Link
-            className="inline-flex items-center rounded-pill bg-primary px-6 py-2 text-sm font-medium text-black hover:opacity-90 transition-opacity"
+            className="inline-flex items-center rounded-pill bg-primary px-6 py-2 text-sm font-medium text-white hover:opacity-90 transition-opacity"
             href="/requests/new"
           >
             Create Your First Request

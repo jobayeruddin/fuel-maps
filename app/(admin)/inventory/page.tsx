@@ -51,7 +51,7 @@ export default async function AdminInventoryPage() {
             </span>
           )}
           <a
-            className="inline-flex items-center rounded-pill bg-primary px-6 py-2 text-sm font-medium text-black hover:opacity-90 transition-opacity"
+            className="inline-flex items-center rounded-pill bg-primary px-6 py-2 text-sm font-medium text-white hover:opacity-90 transition-opacity"
             href="/inventory/new"
           >
             Receive Stock

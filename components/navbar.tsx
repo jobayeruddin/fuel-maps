@@ -43,7 +43,7 @@ export const Navbar = () => {
           href: roleHome,
         }
       : { label: "Login", href: "/login" },
-    user ? { label: "Nearby", href: "/nearby" } : null,
+    role === "USER" ? { label: "Nearby", href: "/nearby" } : null,
   ].filter(Boolean) as { label: string; href: string }[];
 
   return (
@@ -86,7 +86,7 @@ export const Navbar = () => {
             </div>
           ) : (
             <Link
-              className="hidden sm:inline-flex rounded-pill bg-primary px-4 py-2 text-sm font-medium text-black hover:opacity-90 transition-opacity"
+              className="hidden sm:inline-flex rounded-pill bg-primary px-4 py-2 text-sm font-medium text-white hover:opacity-90 transition-opacity"
               href="/login"
             >
               Sign in
