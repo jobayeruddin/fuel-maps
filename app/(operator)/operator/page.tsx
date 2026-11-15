@@ -181,7 +181,7 @@ export default async function OperatorDashboardPage() {
                     </p>
                     <p className="text-sm text-text-secondary">
                       {t.user.name} - {t.vehicle.registration_number} - $
-                      {t.total_amount}
+                      {Number(t.total_amount)}
                     </p>
                   </div>
                   <span className="text-sm font-mono text-green-400">

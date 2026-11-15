@@ -232,7 +232,7 @@ function DashboardContent({
                     </p>
                     <p className="text-sm text-text-secondary">
                       {t.vehicle.registration_number} @ {t.pump.name} - $
-                      {t.total_amount}
+                      {Number(t.total_amount)}
                     </p>
                   </div>
                   <span className="text-sm font-mono text-green-400">

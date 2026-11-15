@@ -1,5 +1,7 @@
 import { headers } from "next/headers";
 
+import DispenseForm from "./DispenseForm";
+
 import { getSessionUser, getOperatorPumpId } from "@/lib/authorization";
 import { requireOperatorPage } from "@/lib/page-authorization";
 import { prisma } from "@/lib/prisma";
@@ -182,61 +184,18 @@ export default async function OperatorRequestDetailPage({
           </div>
         )}
 
-        {(request.status === "APPROVED" || request.status === "COMPLETED") && (
+        {request.status === "APPROVED" && (
           <div className="rounded-card bg-surface border border-border p-6">
             <h2 className="text-lg font-medium mb-4">Dispense Fuel</h2>
             <p className="text-sm text-text-secondary mb-4">
               Record the actual fuel dispensed. This will create a transaction
               and deduct inventory.
             </p>
-            <form action="/api/operator/requests/dispense" method="POST">
-              <input name="requestId" type="hidden" value={id} />
-              <div className="grid gap-4 md:grid-cols-3 mb-4">
-                <label className="flex flex-col gap-2">
-                  <span className="font-mono text-xs tracking-wider text-text-secondary uppercase">
-                    Actual Quantity (L)
-                  </span>
-                  <input
-                    required
-                    className="w-full rounded-control bg-background border border-border px-4 py-3 text-sm text-text-primary placeholder:text-text-secondary focus:outline-none focus:border-primary"
-                    min="0.01"
-                    name="actual_quantity"
-                    placeholder="Enter actual dispensed quantity"
-                    step="0.01"
-                    type="number"
-                  />
-                </label>
-                <label className="flex flex-col gap-2">
-                  <span className="font-mono text-xs tracking-wider text-text-secondary uppercase">
-                    Unit Price ($/L)
-                  </span>
-                  <input
-                    disabled
-                    className="w-full rounded-control bg-background border border-border px-4 py-3 text-sm text-text-secondary cursor-not-allowed"
-                    defaultValue={request.fuel_type.price_per_liter}
-                    step="0.01"
-                    type="number"
-                  />
-                </label>
-                <label className="flex flex-col gap-2">
-                  <span className="font-mono text-xs tracking-wider text-text-secondary uppercase">
-                    Remarks
-                  </span>
-                  <input
-                    className="w-full rounded-control bg-background border border-border px-4 py-3 text-sm text-text-primary placeholder:text-text-secondary focus:outline-none focus:border-primary"
-                    name="remarks"
-                    placeholder="Optional notes"
-                    type="text"
-                  />
-                </label>
-              </div>
-              <button
-                className="rounded-pill bg-primary text-black px-6 py-2 text-sm font-medium hover:opacity-90 transition-opacity"
-                type="submit"
-              >
-                Record Dispensing
-              </button>
-            </form>
+            <DispenseForm
+              pricePerLiter={Number(request.fuel_type.price_per_liter)}
+              quantity={request.quantity}
+              requestId={id}
+            />
           </div>
         )}
       </div>
