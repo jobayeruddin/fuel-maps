@@ -193,7 +193,7 @@ export default async function OperatorRequestDetailPage({
             </p>
             <DispenseForm
               pricePerLiter={Number(request.fuel_type.price_per_liter)}
-              quantity={request.quantity}
+              quantity={Number(request.quantity)}
               requestId={id}
             />
           </div>

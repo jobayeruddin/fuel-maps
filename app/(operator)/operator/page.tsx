@@ -95,37 +95,72 @@ export default async function OperatorDashboardPage() {
         </div>
 
         <div className="grid gap-6 md:grid-cols-2">
-          <div className="rounded-card bg-surface border border-border p-6">
-            <h2 className="text-lg font-medium mb-4">
-              Pending Requests ({dashboardData.pendingRequests.length})
-            </h2>
-            {dashboardData.pendingRequests.length === 0 ? (
-              <p className="text-sm text-text-secondary">No pending requests</p>
-            ) : (
-              <div className="space-y-3">
-                {dashboardData.pendingRequests.map((r: any) => (
-                  <div
-                    key={r.request_id}
-                    className="p-3 rounded-control bg-background border border-border"
-                  >
-                    <p className="font-medium">
-                      {r.fuel_type.fuel_name} - {Number(r.quantity)}L
-                    </p>
-                    <p className="text-sm text-text-secondary">
-                      {r.user.name} - {r.vehicle.registration_number}
-                    </p>
-                    <div className="mt-2 flex gap-2">
-                      <a
-                        className="px-3 py-1 text-xs text-primary hover:underline"
-                        href={`/operator/requests/${r.request_id}`}
-                      >
-                        View
-                      </a>
+          <div className="space-y-6">
+            <div className="rounded-card bg-surface border border-border p-6">
+              <h2 className="text-lg font-medium mb-4">
+                Pending Requests ({dashboardData.pendingRequests.length})
+              </h2>
+              {dashboardData.pendingRequests.length === 0 ? (
+                <p className="text-sm text-text-secondary">No pending requests</p>
+              ) : (
+                <div className="space-y-3">
+                  {dashboardData.pendingRequests.map((r: any) => (
+                    <div
+                      key={r.request_id}
+                      className="p-3 rounded-control bg-background border border-border"
+                    >
+                      <p className="font-medium">
+                        {r.fuel_type.fuel_name} - {Number(r.quantity)}L
+                      </p>
+                      <p className="text-sm text-text-secondary">
+                        {r.user.name} - {r.vehicle.registration_number}
+                      </p>
+                      <div className="mt-2 flex gap-2">
+                        <a
+                          className="px-3 py-1 text-xs text-primary hover:underline"
+                          href={`/operator/requests/${r.request_id}`}
+                        >
+                          View
+                        </a>
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-            )}
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className="rounded-card bg-surface border border-border p-6">
+              <h2 className="text-lg font-medium mb-4">
+                Approved — Ready to Dispense ({dashboardData.approvedRequests.length})
+              </h2>
+              {dashboardData.approvedRequests.length === 0 ? (
+                <p className="text-sm text-text-secondary">No approved requests</p>
+              ) : (
+                <div className="space-y-3">
+                  {dashboardData.approvedRequests.map((r: any) => (
+                    <div
+                      key={r.request_id}
+                      className="p-3 rounded-control bg-background border border-border"
+                    >
+                      <p className="font-medium">
+                        {r.fuel_type.fuel_name} - {Number(r.quantity)}L
+                      </p>
+                      <p className="text-sm text-text-secondary">
+                        {r.user.name} - {r.vehicle.registration_number}
+                      </p>
+                      <div className="mt-2 flex gap-2">
+                        <a
+                          className="px-3 py-1 text-xs text-primary hover:underline"
+                          href={`/operator/requests/${r.request_id}`}
+                        >
+                          Dispense
+                        </a>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="rounded-card bg-surface border border-border p-6">

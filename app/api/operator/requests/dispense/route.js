@@ -7,10 +7,10 @@ export async function POST(req) {
   requireOperator({ user });
   const pumpId = await getOperatorPumpId({ user });
 
-  const formData = await req.formData();
-  const requestId = parseInt(formData.get("requestId"));
-  const actualQuantity = parseFloat(formData.get("actual_quantity"));
-  const remarks = formData.get("remarks") || null;
+  const body = await req.json();
+  const requestId = parseInt(body.requestId);
+  const actualQuantity = parseFloat(body.actual_quantity);
+  const remarks = body.remarks || null;
 
   if (!actualQuantity || actualQuantity <= 0) {
     return Response.json({ error: "Valid quantity is required" }, { status: 400 });
