@@ -95,7 +95,7 @@ function DashboardContent({
             <p className="font-mono text-xs text-text-secondary uppercase">
               Pending
             </p>
-            <p className="mt-2 text-3xl font-medium text-yellow-400">
+            <p className="mt-2 text-3xl font-medium text-yellow-600">
               {pendingCount}
             </p>
           </div>
@@ -103,7 +103,7 @@ function DashboardContent({
             <p className="font-mono text-xs text-text-secondary uppercase">
               Completed
             </p>
-            <p className="mt-2 text-3xl font-medium text-green-400">
+            <p className="mt-2 text-3xl font-medium text-green-600">
               {dispensedCount}
             </p>
           </div>
@@ -150,7 +150,7 @@ function DashboardContent({
                       </p>
                     </div>
                     <span
-                      className={`text-xs font-mono ${v.status === "ACTIVE" ? "text-green-400" : "text-text-secondary"}`}
+                      className={`text-xs font-mono ${v.status === "ACTIVE" ? "text-green-600" : "text-text-secondary"}`}
                     >
                       {v.status}
                     </span>
@@ -192,9 +192,9 @@ function DashboardContent({
                     <span
                       className={`text-xs font-mono px-2 py-1 rounded-full ${
                         r.status === "PENDING"
-                          ? "bg-yellow-500/20 text-yellow-400"
+                          ? "bg-yellow-500/20 text-yellow-600"
                           : r.status === "APPROVED"
-                            ? "bg-green-500/20 text-green-400"
+                            ? "bg-green-500/20 text-green-600"
                             : r.status === "COMPLETED"
                               ? "bg-primary/20 text-primary"
                               : r.status === "REJECTED"
@@ -235,7 +235,7 @@ function DashboardContent({
                       {Number(t.total_amount)}
                     </p>
                   </div>
-                  <span className="text-sm font-mono text-green-400">
+                  <span className="text-sm font-mono text-green-600">
                     {new Date(t.dispensed_at).toLocaleDateString()}
                   </span>
                 </div>

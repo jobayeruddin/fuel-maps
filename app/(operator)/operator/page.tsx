@@ -61,7 +61,7 @@ export default async function OperatorDashboardPage() {
             <p className="font-mono text-xs text-text-secondary uppercase">
               Pending Requests
             </p>
-            <p className="mt-2 text-3xl font-medium text-yellow-400">
+            <p className="mt-2 text-3xl font-medium text-yellow-600">
               {dashboardData.pendingRequests.length}
             </p>
           </div>
@@ -190,7 +190,7 @@ export default async function OperatorDashboardPage() {
                         {Number(inv.quantity)} L
                       </p>
                       {inv.quantity < LOW_STOCK_THRESHOLD && (
-                        <span className="text-xs font-mono px-2 py-1 rounded-full bg-yellow-500/20 text-yellow-400">
+                        <span className="text-xs font-mono px-2 py-1 rounded-full bg-yellow-500/20 text-yellow-600">
                           Low Stock
                         </span>
                       )}
@@ -224,7 +224,7 @@ export default async function OperatorDashboardPage() {
                       {Number(t.total_amount)}
                     </p>
                   </div>
-                  <span className="text-sm font-mono text-green-400">
+                  <span className="text-sm font-mono text-green-600">
                     {new Date(t.dispensed_at).toLocaleString()}
                   </span>
                 </div>

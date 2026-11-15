@@ -279,7 +279,7 @@ export default async function AdminReportsPage({
               report.lowStock.map((i: any) => (
                 <div
                   key={i.inventory_id}
-                  className="p-3 rounded-control bg-background border border-yellow-500/20 text-yellow-400"
+                  className="p-3 rounded-control bg-background border border-yellow-500/20 text-yellow-600"
                 >
                   <p className="font-medium">
                     {i.oil_pumps.name} - {i.fuel_types.fuel_name}

@@ -13,7 +13,7 @@ function LowStockAlerts({ items }: { items: any[] }) {
       {items.map((item: any) => (
         <div
           key={item.inventory_id}
-          className="p-3 rounded-control bg-background border border-border"
+          className="px-3 py-3 rounded-3xl bg-background border border-border"
         >
           <p className="font-medium">{item.fuel_types.fuel_name}</p>
           <p className="text-sm text-text-secondary">
@@ -31,7 +31,7 @@ function RecentRequests({ requests }: { requests: any[] }) {
       {requests.map((r: any) => (
         <div
           key={r.request_id}
-          className="p-3 rounded-control bg-background border border-border"
+          className="p-3 rounded-3xl bg-background border border-border"
         >
           <div className="flex items-center justify-between">
             <div>
@@ -45,9 +45,9 @@ function RecentRequests({ requests }: { requests: any[] }) {
             <span
               className={`text-xs font-mono px-2 py-1 rounded-full ${
                 r.status === "PENDING"
-                  ? "bg-yellow-500/20 text-yellow-400"
+                  ? "bg-yellow-500/20 text-yellow-600"
                   : r.status === "APPROVED"
-                    ? "bg-green-500/20 text-green-400"
+                    ? "bg-green-500/20 text-green-600"
                     : r.status === "COMPLETED"
                       ? "bg-primary/20 text-primary"
                       : r.status === "REJECTED"
@@ -70,7 +70,7 @@ function RecentTransactions({ transactions }: { transactions: any[] }) {
       {transactions.map((t: any) => (
         <div
           key={t.transaction_id}
-          className="flex items-center justify-between p-3 rounded-control bg-background border border-border"
+          className="flex items-center justify-between p-3 rounded-3xl bg-background border border-border"
         >
           <div>
             <p className="font-medium">
@@ -80,7 +80,7 @@ function RecentTransactions({ transactions }: { transactions: any[] }) {
               {t.user.name} @ {t.pump.name} - ${Number(t.total_amount)}
             </p>
           </div>
-          <span className="text-sm font-mono text-green-400">
+          <span className="text-sm font-mono text-green-600">
             {new Date(t.dispensed_at).toLocaleString()}
           </span>
         </div>
@@ -281,7 +281,7 @@ export default async function AdminDashboardPage() {
             <p className="font-mono text-xs text-text-secondary uppercase">
               Pending Requests
             </p>
-            <p className="mt-2 text-3xl font-medium text-yellow-400">
+            <p className="mt-2 text-3xl font-medium text-yellow-600">
               {dashboardData.stats.pendingRequests}
             </p>
           </div>

@@ -77,7 +77,7 @@ export default async function AdminUsersPage() {
                 </td>
                 <td className="px-6 py-4">
                   <span
-                    className={`text-xs font-mono px-2 py-1 rounded-full ${u.emailVerified ? "bg-green-500/20 text-green-400" : "bg-yellow-500/20 text-yellow-400"}`}
+                    className={`text-xs font-mono px-2 py-1 rounded-full ${u.emailVerified ? "bg-green-500/20 text-green-600" : "bg-yellow-500/20 text-yellow-600"}`}
                   >
                     {u.emailVerified ? "Verified" : "Pending"}
                   </span>

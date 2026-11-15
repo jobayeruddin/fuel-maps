@@ -74,7 +74,7 @@ export default async function AdminOperatorsPage() {
                     {op.user.email}
                   </span>
                   <span
-                    className={`text-xs font-mono px-2 py-1 rounded-full ${op.status === "ACTIVE" ? "bg-green-500/20 text-green-400" : "bg-text-secondary/20 text-text-secondary"}`}
+                    className={`text-xs font-mono px-2 py-1 rounded-full ${op.status === "ACTIVE" ? "bg-green-500/20 text-green-600" : "bg-text-secondary/20 text-text-secondary"}`}
                   >
                     {op.status}
                   </span>

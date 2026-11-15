@@ -68,7 +68,7 @@ export const Navbar = () => {
         </ul>
 
         <div className="flex items-center gap-2">
-          <ThemeSwitch />
+          {/* <ThemeSwitch /> */}
           {isPending ? (
             <span className="hidden sm:inline text-sm text-text-secondary">
               …

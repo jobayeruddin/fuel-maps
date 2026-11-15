@@ -60,7 +60,7 @@ export default async function VehiclesPage() {
                     {v.registration_number}
                   </p>
                   <span
-                    className={`text-xs font-mono px-2 py-1 rounded-full ${v.status === "ACTIVE" ? "bg-green-500/20 text-green-400" : "bg-text-secondary/20 text-text-secondary"}`}
+                    className={`text-xs font-mono px-2 py-1 rounded-full ${v.status === "ACTIVE" ? "bg-green-500/20 text-green-600" : "bg-text-secondary/20 text-text-secondary"}`}
                   >
                     {v.status}
                   </span>

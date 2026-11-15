@@ -33,7 +33,7 @@ export default async function AdminPumpsPage() {
           </h1>
         </div>
         <a
-          className="inline-flex items-center rounded-pill bg-primary px-6 py-2 text-sm font-medium text-black hover:opacity-90 transition-opacity"
+          className="inline-flex items-center rounded-pill bg-primary px-6 py-2 text-sm font-medium text-white hover:opacity-90 transition-opacity"
           href="/pumps/new"
         >
           Add Pump
@@ -61,7 +61,7 @@ export default async function AdminPumpsPage() {
                 <div className="flex items-center gap-3">
                   <p className="font-mono text-lg font-medium">{pump.name}</p>
                   <span
-                    className={`text-xs font-mono px-2 py-1 rounded-full ${pump.status === "ACTIVE" ? "bg-green-500/20 text-green-400" : "bg-text-secondary/20 text-text-secondary"}`}
+                    className={`text-xs font-mono px-2 py-1 rounded-full ${pump.status === "ACTIVE" ? "bg-green-500/20 text-green-600" : "bg-text-secondary/20 text-text-secondary"}`}
                   >
                     {pump.status}
                   </span>

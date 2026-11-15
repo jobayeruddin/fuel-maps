@@ -66,9 +66,9 @@ export default async function UserRequestsPage() {
                   <span
                     className={`text-xs font-mono px-2 py-1 rounded-full ${
                       r.status === "PENDING"
-                        ? "bg-yellow-500/20 text-yellow-400"
+                        ? "bg-yellow-500/20 text-yellow-600"
                         : r.status === "APPROVED"
-                          ? "bg-green-500/20 text-green-400"
+                          ? "bg-green-500/20 text-green-600"
                           : r.status === "COMPLETED"
                             ? "bg-primary/20 text-primary"
                             : r.status === "REJECTED"

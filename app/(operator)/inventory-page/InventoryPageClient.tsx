@@ -47,7 +47,7 @@ export default function InventoryPageClient({
           </h1>
         </div>
         {lowStockCount > 0 && (
-          <span className="text-xs font-mono px-2 py-1 rounded-full bg-yellow-500/20 text-yellow-400">
+          <span className="text-xs font-mono px-2 py-1 rounded-full bg-yellow-500/20 text-yellow-600">
             {lowStockCount} Low Stock Item(s)
           </span>
         )}
@@ -86,7 +86,7 @@ export default function InventoryPageClient({
                 </div>
                 <div className="flex items-center gap-2">
                   {inv.quantity < LOW_STOCK_THRESHOLD && (
-                    <span className="text-xs font-mono px-2 py-1 rounded-full bg-yellow-500/20 text-yellow-400">
+                    <span className="text-xs font-mono px-2 py-1 rounded-full bg-yellow-500/20 text-yellow-600">
                       Low Stock
                     </span>
                   )}
@@ -97,7 +97,7 @@ export default function InventoryPageClient({
                   )}
                   {inv.quantity >= LOW_STOCK_THRESHOLD &&
                     inv.status === "ACTIVE" && (
-                      <span className="text-xs font-mono px-2 py-1 rounded-full bg-green-500/20 text-green-400">
+                      <span className="text-xs font-mono px-2 py-1 rounded-full bg-green-500/20 text-green-600">
                         OK
                       </span>
                     )}

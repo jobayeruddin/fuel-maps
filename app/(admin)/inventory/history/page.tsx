@@ -76,10 +76,10 @@ export default async function InventoryHistoryPage() {
                   <span
                     className={`text-xs font-mono px-2 py-1 rounded-full ${
                       m.movement_type === "STOCK_IN"
-                        ? "bg-green-500/20 text-green-400"
+                        ? "bg-green-500/20 text-green-600"
                         : m.movement_type === "DISPENSE"
                           ? "bg-primary/20 text-primary"
-                          : "bg-yellow-500/20 text-yellow-400"
+                          : "bg-yellow-500/20 text-yellow-600"
                     }`}
                   >
                     {m.movement_type}

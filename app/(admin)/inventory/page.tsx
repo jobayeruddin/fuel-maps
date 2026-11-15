@@ -46,7 +46,7 @@ export default async function AdminInventoryPage() {
         </div>
         <div className="flex items-center gap-3">
           {lowStockItems.length > 0 && (
-            <span className="text-xs font-mono px-2 py-1 rounded-full bg-yellow-500/20 text-yellow-400">
+            <span className="text-xs font-mono px-2 py-1 rounded-full bg-yellow-500/20 text-yellow-600">
               {lowStockItems.length} Low Stock
             </span>
           )}
@@ -118,7 +118,7 @@ export default async function AdminInventoryPage() {
                 </td>
                 <td className="px-6 py-4 text-right">
                   {inv.quantity < LOW_STOCK_THRESHOLD ? (
-                    <span className="text-xs font-mono px-2 py-1 rounded-full bg-yellow-500/20 text-yellow-400">
+                    <span className="text-xs font-mono px-2 py-1 rounded-full bg-yellow-500/20 text-yellow-600">
                       Low Stock
                     </span>
                   ) : inv.fuel_types.status === "INACTIVE" ||
@@ -127,7 +127,7 @@ export default async function AdminInventoryPage() {
                       Inactive
                     </span>
                   ) : (
-                    <span className="text-xs font-mono px-2 py-1 rounded-full bg-green-500/20 text-green-400">
+                    <span className="text-xs font-mono px-2 py-1 rounded-full bg-green-500/20 text-green-600">
                       OK
                     </span>
                   )}

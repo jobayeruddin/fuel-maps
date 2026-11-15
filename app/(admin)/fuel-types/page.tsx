@@ -28,7 +28,7 @@ export default async function AdminFuelTypesPage() {
           </h1>
         </div>
         <a
-          className="inline-flex items-center rounded-pill bg-primary px-6 py-2 text-sm font-medium text-black hover:opacity-90 transition-opacity"
+          className="inline-flex items-center rounded-pill bg-primary px-6 py-2 text-sm font-medium text-white hover:opacity-90 transition-opacity"
           href="/fuel-types/new"
         >
           Add Fuel Type
@@ -39,7 +39,7 @@ export default async function AdminFuelTypesPage() {
         <div className="rounded-card bg-surface border border-border p-12 text-center">
           <p className="text-text-secondary mb-4">No fuel types configured.</p>
           <a
-            className="inline-flex items-center rounded-pill bg-primary px-6 py-2 text-sm font-medium text-black hover:opacity-90 transition-opacity"
+            className="inline-flex items-center rounded-pill bg-primary px-6 py-2 text-sm font-medium text-white hover:opacity-90 transition-opacity"
             href="/fuel-types/new"
           >
             Add First Fuel Type
@@ -58,7 +58,7 @@ export default async function AdminFuelTypesPage() {
                     {ft.fuel_name}
                   </p>
                   <span
-                    className={`text-xs font-mono px-2 py-1 rounded-full ${ft.status === "ACTIVE" ? "bg-green-500/20 text-green-400" : "bg-text-secondary/20 text-text-secondary"}`}
+                    className={`text-xs font-mono px-2 py-1 rounded-full ${ft.status === "ACTIVE" ? "bg-green-500/20 text-green-600" : "bg-text-secondary/20 text-text-secondary"}`}
                   >
                     {ft.status}
                   </span>

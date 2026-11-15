@@ -20,7 +20,7 @@
 	--color-text-primary: light(240 5.9% 3.9%) dark(0 0% 100%);
 	--color-text-secondary: light(240 5% 33%) dark(240 5% 63%);
 	--color-border: light(240 5.8% 84%) dark(240 3.7% 15.9%);
-	--color-primary: #a3e635;
+	--color-primary: #3c6100;
 	--color-accent: #a3e635;
 }
 
@@ -86,15 +86,15 @@
     @apply inline-flex items-center rounded-full px-2 py-1 text-xs font-mono;
   }
 
-  .status-pending { @apply bg-yellow-500/20 text-yellow-400; }
-  .status-approved { @apply bg-green-500/20 text-green-400; }
+  .status-pending { @apply bg-yellow-500/20 text-yellow-600; }
+  .status-approved { @apply bg-green-500/20 text-green-600; }
   .status-dispensed { @apply bg-primary/20 text-primary; }
   .status-rejected { @apply bg-red-500/20 text-red-400; }
   .status-cancelled { @apply bg-text-secondary/20 text-text-secondary; }
-  .status-active { @apply bg-green-500/20 text-green-400; }
+  .status-active { @apply bg-green-500/20 text-green-600; }
   .status-inactive { @apply bg-text-secondary/20 text-text-secondary; }
-  .status-low-stock { @apply bg-yellow-500/20 text-yellow-400; }
-  .status-ok { @apply bg-green-500/20 text-green-400; }
+  .status-low-stock { @apply bg-yellow-500/20 text-yellow-600; }
+  .status-ok { @apply bg-green-500/20 text-green-600; }
 }
 
 /* Responsive breakpoints */
