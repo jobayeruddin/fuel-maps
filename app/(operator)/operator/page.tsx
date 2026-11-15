@@ -49,11 +49,11 @@ export default async function OperatorDashboardPage() {
               Pump: {dashboardData.operator.pump.name}
             </p>
           </div>
-          <form action="/api/auth/sign-out" method="POST">
+          {/* <form action="/api/auth/sign-out" method="POST">
             <button className="rounded-pill border border-border px-6 py-2 text-sm text-text-secondary hover:text-text-primary transition-colors">
               Logout
             </button>
-          </form>
+          </form> */}
         </div>
 
         <div className="grid gap-4 md:grid-cols-4">
@@ -101,7 +101,9 @@ export default async function OperatorDashboardPage() {
                 Pending Requests ({dashboardData.pendingRequests.length})
               </h2>
               {dashboardData.pendingRequests.length === 0 ? (
-                <p className="text-sm text-text-secondary">No pending requests</p>
+                <p className="text-sm text-text-secondary">
+                  No pending requests
+                </p>
               ) : (
                 <div className="space-y-3">
                   {dashboardData.pendingRequests.map((r: any) => (
@@ -131,10 +133,13 @@ export default async function OperatorDashboardPage() {
 
             <div className="rounded-card bg-surface border border-border p-6">
               <h2 className="text-lg font-medium mb-4">
-                Approved — Ready to Dispense ({dashboardData.approvedRequests.length})
+                Approved — Ready to Dispense (
+                {dashboardData.approvedRequests.length})
               </h2>
               {dashboardData.approvedRequests.length === 0 ? (
-                <p className="text-sm text-text-secondary">No approved requests</p>
+                <p className="text-sm text-text-secondary">
+                  No approved requests
+                </p>
               ) : (
                 <div className="space-y-3">
                   {dashboardData.approvedRequests.map((r: any) => (

@@ -1,0 +1,20 @@
+import { prisma } from "@/lib/prisma";
+import { getSessionUser, requireOperator, getOperatorPumpId } from "@/lib/authorization";
+import { headers } from "next/headers";
+
+export async function GET(req, { params }) {
+  const user = await getSessionUser(await headers());
+  requireOperator({ user });
+  const pumpId = await getOperatorPumpId({ user });
+  const { fuel_type_id } = await params;
+
+  const inventory = await prisma.fuel_inventory.findFirst({
+    where: { pump_id: pumpId, fuel_type_id: parseInt(fuel_type_id) },
+  });
+
+  if (!inventory) {
+    return Response.json({ error: "Inventory record not found" }, { status: 404 });
+  }
+
+  return Response.json(inventory);
+}

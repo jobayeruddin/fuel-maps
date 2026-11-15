@@ -76,11 +76,11 @@ function DashboardContent({
               </svg>
               Nearby Pumps
             </Link>
-            <form action="/api/auth/sign-out" method="POST">
+            {/* <form action="/api/auth/sign-out" method="POST">
               <button className="rounded-pill border border-border px-6 py-2 text-sm text-text-secondary hover:text-text-primary transition-colors">
                 Logout
               </button>
-            </form>
+            </form> */}
           </div>
         </div>
 

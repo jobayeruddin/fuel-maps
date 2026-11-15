@@ -18,7 +18,7 @@ export function OperatorSidebar() {
     <>
       <button
         aria-label="Toggle sidebar"
-        className="lg:hidden fixed top-16 left-4 z-50 rounded-pill bg-primary p-2 text-black hover:opacity-90 transition-opacity"
+        className="lg:hidden fixed top-16 left-4 rounded-pill bg-primary p-2 text-black hover:opacity-90 transition-opacity"
         onClick={() => setIsMobileOpen(!isMobileOpen)}
       >
         <svg
@@ -47,7 +47,7 @@ export function OperatorSidebar() {
 
       <aside
         className={clsx(
-          "fixed lg:static inset-y-0 left-0 z-40 w-64 bg-surface border-r border-border transition-transform duration-300 ease-in-out flex flex-col",
+          "fixed lg:static inset-y-0 left-0 z-40 w-64 bg-white border-r border-border transition-transform duration-300 ease-in-out flex flex-col",
           isMobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0",
         )}
       >
@@ -109,7 +109,7 @@ export function OperatorSidebar() {
       {isMobileOpen && (
         <div
           aria-hidden="true"
-          className="fixed inset-0 z-30 bg-background/50 lg:hidden"
+          className="fixed inset-0 z-30 bg-background lg:hidden"
           onClick={() => setIsMobileOpen(false)}
         />
       )}

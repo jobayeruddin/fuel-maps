@@ -77,7 +77,7 @@ function RecentTransactions({ transactions }: { transactions: any[] }) {
               {t.fuel_type.fuel_name} - {Number(t.quantity)}L
             </p>
             <p className="text-sm text-text-secondary">
-              {t.user.name} @ {t.pump.name} - ${t.total_amount}
+              {t.user.name} @ {t.pump.name} - ${Number(t.total_amount)}
             </p>
           </div>
           <span className="text-sm font-mono text-green-400">
@@ -219,11 +219,11 @@ export default async function AdminDashboardPage() {
               Hello, {user.name}
             </h1>
           </div>
-          <form action="/api/auth/sign-out" method="POST">
+          {/* <form action="/api/auth/sign-out" method="POST">
             <button className="rounded-pill border border-border px-6 py-2 text-sm text-text-secondary hover:text-text-primary transition-colors">
               Logout
             </button>
-          </form>
+          </form> */}
         </div>
 
         <div className="grid gap-4 md:grid-cols-4">
