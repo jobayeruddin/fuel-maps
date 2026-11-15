@@ -7,13 +7,33 @@ datasource db {
   provider = "mysql"
 }
 
+enum UserRole {
+  USER
+  OPERATOR
+  ADMIN
+}
+
+enum FuelRequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  COMPLETED
+  CANCELLED
+}
+
+enum InventoryMovementType {
+  STOCK_IN
+  DISPENSE
+  ADJUSTMENT
+}
+
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 model fuel_inventory {
   inventory_id Int        @id @default(autoincrement())
   pump_id      Int
   fuel_type_id Int
   quantity     Decimal    @default(0.00) @db.Decimal(12, 2)
-  last_updated DateTime   @default(now()) @db.DateTime(0)
+  last_updated DateTime   @default(now()) @db.DateTime(0) @updatedAt
   oil_pumps    oil_pumps  @relation(fields: [pump_id], references: [pump_id], map: "fuel_inventory_ibfk_1")
   fuel_types   fuel_types @relation(fields: [fuel_type_id], references: [fuel_type_id], map: "fuel_inventory_ibfk_2")
 
@@ -23,23 +43,31 @@ model fuel_inventory {
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 model fuel_types {
-  fuel_type_id    Int               @id @default(autoincrement())
-  fuel_name       String            @unique(map: "fuel_name") @db.VarChar(60)
-  description     String?           @db.VarChar(255)
-  price_per_liter Decimal           @db.Decimal(10, 2)
-  status          fuel_types_status @default(ACTIVE)
-  fuel_inventory  fuel_inventory[]
+  fuel_type_id        Int               @id @default(autoincrement())
+  fuel_name           String            @unique(map: "fuel_name") @db.VarChar(60)
+  description         String?           @db.VarChar(255)
+  price_per_liter     Decimal           @db.Decimal(10, 2)
+  status              fuel_types_status @default(ACTIVE)
+  fuel_inventory      fuel_inventory[]
+  fuelRequests        FuelRequest[]
+  transactions        Transaction[]
+  inventoryMovements  InventoryTransaction[]
 }
 
 model oil_pumps {
-  pump_id        Int              @id @default(autoincrement())
-  name           String           @db.VarChar(120)
-  address        String           @db.VarChar(255)
-  latitude       Decimal?         @db.Decimal(10, 7)
-  longitude      Decimal?         @db.Decimal(10, 7)
-  status         oil_pumps_status @default(ACTIVE)
-  created_at     DateTime         @default(now()) @db.DateTime(0)
-  fuel_inventory fuel_inventory[]
+  pump_id            Int              @id @default(autoincrement())
+  name               String           @db.VarChar(120)
+  address            String           @db.VarChar(255)
+  contact            String?          @db.VarChar(120)
+  latitude           Decimal?         @db.Decimal(10, 7)
+  longitude          Decimal?         @db.Decimal(10, 7)
+  status             oil_pumps_status @default(ACTIVE)
+  created_at         DateTime         @default(now()) @db.DateTime(0)
+  fuel_inventory     fuel_inventory[]
+  operators          Operator[]
+  fuelRequests       FuelRequest[]
+  transactions       Transaction[]
+  inventoryMovements InventoryTransaction[]
 }
 
 enum fuel_types_status {
@@ -52,19 +80,24 @@ enum oil_pumps_status {
   INACTIVE
 }
 
-
 //////
 model User {
-  id            String    @id
-  name          String    @db.Text
-  email         String
-  emailVerified Boolean   @default(false)
-  image         String?   @db.Text
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  role          String?   @db.Text
-  sessions      Session[]
-  accounts      Account[]
+  id                   String    @id
+  name                 String    @db.Text
+  email                String
+  emailVerified        Boolean   @default(false)
+  image                String?   @db.Text
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+  role                 UserRole  @default(USER)
+  sessions             Session[]
+  accounts             Account[]
+  vehicles             Vehicle[]
+  fuelRequests         FuelRequest[]           @relation("RequestUser")
+  reviewedRequests     FuelRequest[]           @relation("RequestReviewer")
+  transactions         Transaction[]
+  inventoryMovements   InventoryTransaction[]
+  operatorRecord       Operator?
 
   @@unique([email])
   @@map("user")
@@ -116,4 +149,104 @@ model Verification {
 
   @@index([identifier(length: 191)])
   @@map("verification")
+}
+
+model Operator {
+  operator_id   Int           @id @default(autoincrement())
+  user_id       String        @unique
+  pump_id       Int
+  status        String        @default("ACTIVE") @db.VarChar(20)
+  created_at    DateTime      @default(now())
+  user          User          @relation(fields: [user_id], references: [id], onDelete: Cascade, map: "operators_user_id_fkey")
+  pump          oil_pumps     @relation(fields: [pump_id], references: [pump_id], map: "operators_pump_id_fkey")
+  transactions  Transaction[]
+
+  @@map("operators")
+}
+
+model Vehicle {
+  vehicle_id          Int      @id @default(autoincrement())
+  user_id             String
+  registration_number String   @unique @db.VarChar(50)
+  vehicle_type        String?  @db.VarChar(50)
+  brand               String?  @db.VarChar(80)
+  model               String?  @db.VarChar(80)
+  manufacturing_year  Int?
+  status              String   @default("ACTIVE") @db.VarChar(20)
+  created_at          DateTime @default(now())
+  user                User     @relation(fields: [user_id], references: [id], onDelete: Cascade, map: "vehicles_user_id_fkey")
+  fuelRequests        FuelRequest[]
+  transactions        Transaction[]
+
+  @@map("vehicles")
+}
+
+model FuelRequest {
+  request_id    Int               @id @default(autoincrement())
+  user_id       String
+  vehicle_id    Int
+  pump_id       Int
+  fuel_type_id  Int
+  quantity      Decimal           @db.Decimal(12, 2)
+  status        FuelRequestStatus @default(PENDING)
+  remarks       String?           @db.Text
+  reviewed_by   String?
+  created_at    DateTime          @default(now())
+  updated_at    DateTime          @updatedAt
+  user          User              @relation("RequestUser", fields: [user_id], references: [id], map: "fuel_requests_user_id_fkey")
+  vehicle       Vehicle           @relation(fields: [vehicle_id], references: [vehicle_id], map: "fuel_requests_vehicle_id_fkey")
+  pump          oil_pumps         @relation(fields: [pump_id], references: [pump_id], map: "fuel_requests_pump_id_fkey")
+  fuel_type     fuel_types        @relation(fields: [fuel_type_id], references: [fuel_type_id], map: "fuel_requests_fuel_type_id_fkey")
+  reviewer      User?             @relation("RequestReviewer", fields: [reviewed_by], references: [id], map: "fuel_requests_reviewed_by_fkey")
+  transaction   Transaction?
+
+  @@index([user_id], map: "fuel_requests_user_id_idx")
+  @@index([pump_id], map: "fuel_requests_pump_id_idx")
+  @@index([status], map: "fuel_requests_status_idx")
+  @@map("fuel_requests")
+}
+
+model Transaction {
+  transaction_id     Int                   @id @default(autoincrement())
+  request_id         Int?                  @unique
+  user_id            String
+  vehicle_id         Int
+  pump_id            Int
+  fuel_type_id       Int
+  operator_id        Int
+  quantity           Decimal               @db.Decimal(12, 2)
+  unit_price         Decimal               @db.Decimal(10, 2)
+  total_amount       Decimal               @db.Decimal(12, 2)
+  dispensed_at       DateTime              @default(now())
+  request            FuelRequest?          @relation(fields: [request_id], references: [request_id], map: "transactions_request_id_fkey")
+  user               User                  @relation(fields: [user_id], references: [id], map: "transactions_user_id_fkey")
+  vehicle            Vehicle               @relation(fields: [vehicle_id], references: [vehicle_id], map: "transactions_vehicle_id_fkey")
+  pump               oil_pumps             @relation(fields: [pump_id], references: [pump_id], map: "transactions_pump_id_fkey")
+  fuel_type          fuel_types            @relation(fields: [fuel_type_id], references: [fuel_type_id], map: "transactions_fuel_type_id_fkey")
+  operator           Operator              @relation(fields: [operator_id], references: [operator_id], map: "transactions_operator_id_fkey")
+  inventoryMovements InventoryTransaction[]
+
+  @@index([user_id], map: "transactions_user_id_idx")
+  @@index([pump_id], map: "transactions_pump_id_idx")
+  @@map("transactions")
+}
+
+model InventoryTransaction {
+  movement_id       Int                   @id @default(autoincrement())
+  pump_id           Int
+  fuel_type_id      Int
+  movement_type     InventoryMovementType
+  quantity_change   Decimal               @db.Decimal(12, 2)
+  resulting_balance Decimal?              @db.Decimal(12, 2)
+  transaction_id    Int?
+  actor_id          String
+  remarks           String?               @db.Text
+  created_at        DateTime              @default(now())
+  pump              oil_pumps             @relation(fields: [pump_id], references: [pump_id], map: "inventory_transactions_pump_id_fkey")
+  fuel_type         fuel_types            @relation(fields: [fuel_type_id], references: [fuel_type_id], map: "inventory_transactions_fuel_type_id_fkey")
+  transaction       Transaction?          @relation(fields: [transaction_id], references: [transaction_id], map: "inventory_transactions_transaction_id_fkey")
+  actor             User                  @relation(fields: [actor_id], references: [id], map: "inventory_transactions_actor_id_fkey")
+
+  @@index([pump_id], map: "inventory_transactions_pump_id_idx")
+  @@map("inventory_transactions")
 }

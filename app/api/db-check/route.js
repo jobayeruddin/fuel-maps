@@ -1,7 +1,12 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { getSessionUser, requireAdmin } from "@/lib/authorization";
+import { headers } from "next/headers";
 
 export async function GET() {
+  const user = await getSessionUser(await headers());
+  requireAdmin({ user });
+
   try {
     await prisma.fuel_types.findMany({
       take: 1,

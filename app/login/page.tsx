@@ -5,6 +5,13 @@ import { useRouter } from "next/navigation";
 
 import { authClient } from "@/lib/auth-client";
 
+function roleRedirect(role: string) {
+  if (role === "ADMIN") return "/admin";
+  if (role === "OPERATOR") return "/operator";
+
+  return "/dashboard";
+}
+
 export default function LoginPage() {
   const router = useRouter();
   const [isSignUp, setIsSignUp] = React.useState(false);
@@ -19,12 +26,20 @@ export default function LoginPage() {
     setError(null);
     setPending(true);
     try {
-      if (isSignUp) {
-        await authClient.signUp.email({ email, password, name });
-      } else {
-        await authClient.signIn.email({ email, password });
+      const { error: authError } = isSignUp
+        ? await authClient.signUp.email({ email, password, name })
+        : await authClient.signIn.email({ email, password });
+
+      if (authError) {
+        setError(authError.message || "Authentication failed");
+
+        return;
       }
-      router.push("/dashboard");
+
+      const { data } = await authClient.getSession();
+      const role = (data?.user as any)?.role as string | undefined;
+
+      router.push(roleRedirect(role || "USER"));
       router.refresh();
     } catch (err: any) {
       setError(err?.message || "Something went wrong");
